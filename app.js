@@ -6,20 +6,14 @@ const bodyParser = require('body-parser');
 
 // console.log(routes.someText);
 const app=express();
-
+const adminRoutes=require('./routes/admin');
+const shopRoutes=require('./routes/shop');
 app.use(bodyParser.urlencoded({extended:false}))
-app.use('/product',(req,res,next)=>{
-    console.log(' product middleware')
-    res.send('<form action="/pro" method="POST"><input type="text" name="title"><button type="submit">ADD PRODUCT</button></form>')
-});
-app.use('/pro',(req,res)=>{
-    console.log(req.body);
-res.redirect('/');
-});
-app.use('/',(req,res,next)=>{
-    console.log(' another middleware')
-    res.send('<h1> hello from express </h1>')
-});
+
+
+app.use(adminRoutes);
+app.use(shopRoutes);
+
 
 //const server = http.createServer(app);
 
